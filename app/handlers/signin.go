@@ -62,7 +62,7 @@ func SignInByEmail() web.HandlerFunc {
 
 		c.Enqueue(tasks.SendSignInEmail(input.Model))
 
-		return c.Ok(web.Map{})
+		return c.Ok(input.Model.VerificationKey)
 	}
 }
 

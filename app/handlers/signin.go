@@ -15,7 +15,7 @@ import (
 	"github.com/getfider/fider/app/pkg/errors"
 	"github.com/getfider/fider/app/pkg/web"
 	webutil "github.com/getfider/fider/app/pkg/web/util"
-	"github.com/getfider/fider/app/tasks"
+	//"github.com/getfider/fider/app/tasks"
 )
 
 // SignInPage renders the sign in page
@@ -60,9 +60,8 @@ func SignInByEmail() web.HandlerFunc {
 			return c.Failure(err)
 		}
 
-		c.Enqueue(tasks.SendSignInEmail(input.Model))
-
-		return c.Ok(input.Model.VerificationKey)
+		//c.Enqueue(tasks.SendSignInEmail(input.Model))
+		return c.Ok(web.BaseURL(c) + "/signin/verify?k=" + input.Model.VerificationKey)
 	}
 }
 

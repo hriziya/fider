@@ -63,6 +63,7 @@ export const Header = () => {
       <EnvironmentInfo />
       <SignInModal isOpen={isSignInModalOpen} onClose={hideModal} />
       { showHeader && (
+        <React.Fragment>
         <div className="c-menu">
         <div className="container">
           <a href="/" className="c-menu-item-title">
@@ -81,6 +82,7 @@ export const Header = () => {
         </div>
       </div>
       <TenantStatusInfo />
+      </React.Fragment>
       )}
     </div>
   );

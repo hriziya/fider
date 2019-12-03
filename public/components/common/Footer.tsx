@@ -8,7 +8,7 @@ export const Footer = () => {
   const fider = useFider();
 
   return (
-    <div id="c-footer">
+    <div id="c-footer" style={{display:'none'}}>
       <div className="container">
         {fider.settings.hasLegal && (
           <div className="l-links">

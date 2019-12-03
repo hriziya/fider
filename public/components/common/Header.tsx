@@ -56,13 +56,14 @@ export const Header = () => {
       </a>
     </div>
   );
-
+  const showHeader = fider.session.isAuthenticated && fider.session.user.isAdministrator;
   const showRightMenu = fider.session.isAuthenticated || !fider.session.tenant.isPrivate;
   return (
     <div id="c-header">
       <EnvironmentInfo />
       <SignInModal isOpen={isSignInModalOpen} onClose={hideModal} />
-      <div className="c-menu">
+      { showHeader && (
+        <div className="c-menu">
         <div className="container">
           <a href="/" className="c-menu-item-title">
             <TenantLogo size={100} />
@@ -80,6 +81,7 @@ export const Header = () => {
         </div>
       </div>
       <TenantStatusInfo />
+      )}
     </div>
   );
 };

@@ -222,7 +222,7 @@ export default class MySettingsPage extends React.Component<MySettingsPageProps,
           </div>
         )}
 
-        <div className="row">
+        <div className="row" style={{display:none}}>
           <div className="col-lg-7">
             <DangerZone />
           </div>

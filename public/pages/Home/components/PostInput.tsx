@@ -75,6 +75,7 @@ export const PostInput = (props: PostInputProps) => {
         onChange={handleDescriptionChange}
         value={description}
         minRows={5}
+        required
         placeholder="Describe your suggestion"
       />
       <MultiImageUploader field="attachments" maxUploads={3} previewMaxWidth={100} onChange={setAttachments} />
@@ -97,6 +98,7 @@ export const PostInput = (props: PostInputProps) => {
           value={title}
           onChange={handleTitleChange}
           placeholder="Title (Short & Descriptive)"
+          required
         />
         {details()}
       </Form>

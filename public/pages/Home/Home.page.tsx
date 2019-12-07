@@ -79,7 +79,7 @@ const HomePage = (props: HomePageProps) => {
         <div className="l-posts-col col-md-8">
           {isLonely() ? (
             <Lonely />
-          ) : title ? (
+          ) : title || description ? (
             <SimilarPosts title={title} tags={props.tags} />
           ) : (
             <PostsContainer posts={props.posts} tags={props.tags} countPerStatus={props.countPerStatus} />

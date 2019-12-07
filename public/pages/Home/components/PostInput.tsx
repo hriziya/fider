@@ -8,7 +8,7 @@ import { useFider } from "@fider/hooks";
 interface PostInputProps {
   placeholder: string;
   onTitleChanged: (title: string) => void;
-  onDescriptionChanged: (description: string) => void;
+//  onDescriptionChanged: (description: string) => void;
 }
 
 const CACHE_TITLE_KEY = "PostInput-Title";

@@ -46,6 +46,7 @@ What can we do better? This is the place for you to vote, discuss and share idea
 const HomePage = (props: HomePageProps) => {
   const fider = useFider();
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const isLonely = () => {
     const len = Object.keys(props.countPerStatus).length;
@@ -72,6 +73,7 @@ const HomePage = (props: HomePageProps) => {
           <PostInput
             placeholder={fider.session.tenant.invitation || "Enter your suggestion here..."}
             onTitleChanged={setTitle}
+            onDescriptionChanged={setDescription}
           />
         </div>
         <div className="l-posts-col col-md-8">

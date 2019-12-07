@@ -8,6 +8,7 @@ import { useFider } from "@fider/hooks";
 interface PostInputProps {
   placeholder: string;
   onTitleChanged: (title: string) => void;
+  onDescriptionChanged: (description: string) => void;
 }
 
 const CACHE_TITLE_KEY = "PostInput-Title";
@@ -33,6 +34,10 @@ export const PostInput = (props: PostInputProps) => {
     props.onTitleChanged(title);
   }, [title]);
 
+  useEffect(() => {
+    props.onDescriptionChanged(description);
+  }, [description]);
+
   const handleTitleFocus = () => {
     if (!fider.session.isAuthenticated && titleRef.current) {
       titleRef.current.blur();
@@ -52,10 +57,11 @@ export const PostInput = (props: PostInputProps) => {
   const handleDescriptionChange = (value: string) => {
     cache.session.set(CACHE_DESCRIPTION_KEY, value);
     setDescription(value);
+    props.onDescriptionChanged(value);
   };
 
   const submit = async (event: ButtonClickEvent) => {
-    if (title) {
+    if (title && description) {
       const result = await actions.createPost(title, description, attachments);
       if (result.ok) {
         clearError();
@@ -75,7 +81,6 @@ export const PostInput = (props: PostInputProps) => {
         onChange={handleDescriptionChange}
         value={description}
         minRows={5}
-        required
         placeholder="Describe your suggestion"
       />
       <MultiImageUploader field="attachments" maxUploads={3} previewMaxWidth={100} onChange={setAttachments} />
@@ -98,7 +103,6 @@ export const PostInput = (props: PostInputProps) => {
           value={title}
           onChange={handleTitleChange}
           placeholder="Title (Short & Descriptive)"
-          required
         />
         {details()}
       </Form>

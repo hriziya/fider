@@ -287,6 +287,19 @@ func registerUser(ctx context.Context, c *cmd.RegisterUser) error {
 			}
 		}
 
+		cmd1 := "INSERT INTO user_settings (user_id, key, value, tenant_id) VALUES ($1, $2, $3, $4)"
+		if _, err := trx.Execute(cmd1, c.User.ID, "event_notification_new_post", 3, tenant.ID); err != nil {
+			return errors.Wrap(err, "failed to add event_notification_new_post")
+		}
+		cmd2 := "INSERT INTO user_settings (user_id, key, value, tenant_id) VALUES ($1, $2, $3, $4)"
+		if _, err := trx.Execute(cmd2, c.User.ID, "event_notification_new_comment", 3, tenant.ID); err != nil {
+			return errors.Wrap(err, "failed to add event_notification_new_comment")
+		}
+		cmd3 := "INSERT INTO user_settings (user_id, key, value, tenant_id) VALUES ($1, $2, $3, $4)"
+		if _, err := trx.Execute(cmd3, c.User.ID, "event_notification_change_status", 3, tenant.ID); err != nil {
+			return errors.Wrap(err, "failed to add event_notification_change_status")
+		}
+
 		return nil
 	})
 }

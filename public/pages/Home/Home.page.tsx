@@ -64,19 +64,22 @@ const HomePage = (props: HomePageProps) => {
   return (
     <div id="p-home" className="page container">
       <div className="row">
-        <div className="l-welcome-col col-md-4">
-          <MultiLineText
-            className="welcome-message"
-            text={fider.session.tenant.welcomeMessage || defaultWelcomeMessage}
-            style="full"
-          />
-          <PostInput
-            placeholder={fider.session.tenant.invitation || "Enter your suggestion here..."}
-            onTitleChanged={setTitle}
-            onDescriptionChanged={setDescription}
-          />
-        </div>
-        <div className="l-posts-col col-md-8">
+        {
+          fider.session.isAuthenticated && (
+          <div className="l-welcome-col col-md-4">
+            <MultiLineText
+              className="welcome-message"
+              text={fider.session.tenant.welcomeMessage || defaultWelcomeMessage}
+              style="full"
+            />
+            <PostInput
+              placeholder={fider.session.tenant.invitation || "Enter your suggestion here..."}
+              onTitleChanged={setTitle}
+              onDescriptionChanged={setDescription}
+            />
+          </div>
+        )}
+        <div className={fider.session.isAuthenticated ? "l-posts-col col-md-8" : "l-posts-col col-md-12"}>
           {isLonely() ? (
             <Lonely />
           ) : title || description ? (

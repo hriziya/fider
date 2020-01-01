@@ -55,6 +55,8 @@ export const CommentInput = (props: CommentInputProps) => {
       <SignInModal isOpen={isSignInModalOpen} onClose={hideModal} />
       <div className={`c-comment-input ${Fider.session.isAuthenticated && "m-authenticated"}`}>
         {Fider.session.isAuthenticated && <Avatar user={Fider.session.user} />}
+        {
+          Fider.session.isAuthenticated && (
         <Form error={error}>
           {Fider.session.isAuthenticated && <UserName user={Fider.session.user} />}
           <TextArea
@@ -75,6 +77,7 @@ export const CommentInput = (props: CommentInputProps) => {
             </>
           )}
         </Form>
+          )}
       </div>
     </>
   );

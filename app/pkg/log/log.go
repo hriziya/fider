@@ -13,7 +13,7 @@ import (
 var CurrentLevel = parseLevel(strings.ToUpper(env.Config.Log.Level))
 
 func IsEnabled(level Level) bool {
-	return CurrentLevel <= level
+	return false //CurrentLevel <= level
 }
 
 func Debug(ctx context.Context, message string) {

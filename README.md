@@ -2,7 +2,7 @@
   <a href="https://getfider.com">
     <img src="etc/logo-small.png" />
   </a>
-  <h1 align="center">Fider</h1>
+  <h1 align="center">Fider - Hitesh</h1>
   <div align="center">
     <strong>A platform to collect and organize customer feedback.</strong>
   </div>

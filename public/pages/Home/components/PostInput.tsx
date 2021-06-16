@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, ButtonClickEvent, Input, Form, TextArea, MultiImageUploader } from "@fider/components";
+import { Button, ButtonClickEvent, Input, Form, TextArea, MultiImageUploader, Select, SelectOption } from "@fider/components";
 import { SignInModal } from "@fider/components";
 import { cache, actions, Failure } from "@fider/services";
-import { ImageUpload } from "@fider/models";
+import { ImageUpload, ModuleNames } from "@fider/models";
 import { useFider } from "@fider/hooks";
 
 interface PostInputProps {
@@ -11,6 +11,7 @@ interface PostInputProps {
   onDescriptionChanged: (description: string) => void;
 }
 
+const CACHE_MODULE_KEY = "PostInput-Module";
 const CACHE_TITLE_KEY = "PostInput-Title";
 const CACHE_DESCRIPTION_KEY = "PostInput-Description";
 
@@ -24,6 +25,7 @@ export const PostInput = (props: PostInputProps) => {
 
   const fider = useFider();
   const titleRef = useRef<HTMLInputElement>();
+  const [moduleName, setModuleName] = useState(getCachedValue(CACHE_MODULE_KEY));
   const [title, setTitle] = useState(getCachedValue(CACHE_TITLE_KEY));
   const [description, setDescription] = useState(getCachedValue(CACHE_DESCRIPTION_KEY));
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
@@ -90,10 +92,31 @@ export const PostInput = (props: PostInputProps) => {
     </>
   );
 
+  const options = ModuleNames.All.map(s => ({
+    value: s.value.toString(),
+    label: s.title
+  }));
+
+  const handleModuleNameChange = (opt?: SelectOption) => {
+    if (opt) {
+      cache.session.set(CACHE_MODULE_KEY, opt.value);
+      setModuleName(opt.value);
+    }
+  };
+
   return (
     <>
       <SignInModal isOpen={isSignInModalOpen} onClose={hideModal} />
       <Form error={error}>
+
+        <Select
+          field="module"
+          label="Module"
+          defaultValue={moduleName}
+          options={options}
+          onChange={handleModuleNameChange}
+        />
+
         <Input
           field="title"
           noTabFocus={!fider.session.isAuthenticated}

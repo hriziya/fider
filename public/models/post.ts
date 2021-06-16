@@ -52,6 +52,42 @@ export class PostStatus {
   ];
 }
 
+export class ModuleNames {
+  constructor(
+    public title: string,
+    public value: string,
+    public show: boolean,
+    public closed: boolean,
+    public filterable: boolean
+  ) {}
+
+  public static Projects = new ModuleNames("Projects", "projects", true, false, true);
+  public static Estimates = new ModuleNames("Estimates", "estimates", true, false, true);
+  public static Invoices = new ModuleNames("Invoices", "invoices", true, false, true);
+  public static Timecards = new ModuleNames("Timecards", "timecards", true, false, true);
+  public static Reports = new ModuleNames("Reports", "reports", true, false, true);
+  public static Settings = new ModuleNames("Settings", "settings", true, false, true);
+  public static Dashboard = new ModuleNames("Dashboard", "dashboard", true, false, true);
+
+  public static Get(value: string): ModuleNames {
+    for (const status of ModuleNames.All) {
+      if (status.value === value) {
+        return status;
+      }
+    }
+    throw new Error(`ModuleNames not found for value ${value}.`);
+  }
+
+  public static All = [
+    ModuleNames.Open,
+    ModuleNames.Planned,
+    ModuleNames.Started,
+    ModuleNames.Completed,
+    ModuleNames.Duplicate,
+    ModuleNames.Declined
+  ];
+}
+
 export interface PostResponse {
   user: User;
   text: string;

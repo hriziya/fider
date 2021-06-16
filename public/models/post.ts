@@ -79,12 +79,13 @@ export class ModuleNames {
   }
 
   public static All = [
-    ModuleNames.Open,
-    ModuleNames.Planned,
-    ModuleNames.Started,
-    ModuleNames.Completed,
-    ModuleNames.Duplicate,
-    ModuleNames.Declined
+    ModuleNames.Projects,
+    ModuleNames.Estimates,
+    ModuleNames.Invoices,
+    ModuleNames.Timecards,
+    ModuleNames.Reports,
+    ModuleNames.Settings,
+    ModuleNames.Dashboard
   ];
 }
 
